@@ -16,6 +16,7 @@
 		@content;
 	}
 }
+
 @mixin grid($columnas, $espaciado: 2rem) {
 	display: grid;
 	gap: $espaciado;

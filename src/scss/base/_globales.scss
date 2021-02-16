@@ -12,6 +12,7 @@ body {
 p {
     color: $blanco;
     font-size: 2rem;
+	font-family: $fuente_secundaria;
 }
 .contenedor {
     width: 95%;
@@ -37,9 +38,12 @@ h1 {
 	font-family: $fuente_principal;
     font-size: 4rem;
 	font-weight: 700;
+	text-shadow: $sombraTitulo1;
 }
 h2 {
     font-size: 3.6rem;
+	text-shadow: $sombraTitulo1;
+	font-family: $fuente_principal;
 }
 h3 {
     font-size: 3rem;
