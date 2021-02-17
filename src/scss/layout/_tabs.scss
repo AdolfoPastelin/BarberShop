@@ -11,6 +11,11 @@
 		border: .1rem solid $negro;
 		text-transform: uppercase;
 
+		&.actual {
+			background-color: $azul;
+			color: $blanco;
+		}
+
 		&:hover {
 			cursor: pointer;
 		}

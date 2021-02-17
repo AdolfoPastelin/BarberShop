@@ -1,6 +1,6 @@
 .listado-servicios {
 	@include tablet {
-		@include grid(2, 2rem)
+		@include grid(2, 2rem);
 	}
 
 	.servicio {
@@ -12,10 +12,6 @@
 
 		@include tablet {
 			margin-bottom: 0;
-		}
-
-		p {
-			margin: 0 0 $separacion - 3.5 0;
 		}
 
 		.nombre-servicio {
@@ -32,5 +28,17 @@
 			font-weight: $bold;
 			font-family: $fuente_terciaria;
 		}
+
+		&.seleccionado {
+			background-color: $azul;
+
+			p {
+				color: $blanco;
+			}
+		}
 	}
+}
+
+.servicio-subtitulo {
+	text-transform: uppercase;
 }

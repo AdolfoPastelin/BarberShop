@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="description" content="Webpage that offers an excellent service in terms of fashioned haircuts">
 	<link rel="shortcut icon" type="image/x-icon" href="build/img/f.ico">
-    <link rel="stylesheet" href="build/css/app.css">
-    <title>Barber Shop</title>
+	<link rel="stylesheet" href="build/css/app.css">
+	<title>Barber Shop</title>
 </head>
+
 <body>
 
-    <div class="contenedor-estetica">
-        <div class="imagen"></div>
-        <div class="app">
-            <header class="header">
-                <h1>Barber Shop</h1>
-            </header>
-			
-            <nav class="tabs">
-                <button type="button">Services</button>
-                <button type="button">Client information</button>
-                <button type="button">Summary</button>
-            </nav>
+	<div class="contenedor-estetica">
+		<div class="imagen"></div>
+		<div class="app">
+			<header class="header">
+				<h1>Barber Shop</h1>
+			</header>
+
+			<nav class="tabs">
+				<button type="button" data-paso="1">Services</button>
+				<button type="button" data-paso="2">Client information</button>
+				<button type="button" data-paso="3">Summary</button>
+			</nav>
 
 
 			<!-- Inicia el contenido de la app -->
-			<div class="seccion">
+			<div id="paso-1" class="seccion">
 				<h2>Services</h2>
-				<p class="text-center">Choose the services that you want</p>
+				<p class="servicio-subtitulo text-center">Choose the services that you want</p>
+				<p class="text-center">(You can select more than one option)</p>
 				<div id="servicios" class="listado-servicios"></div>
 			</div>
-			<div class="seccion">
+			<div id="paso-2" class="seccion">
 				<h2>Data and appointment</h2>
 			</div>
-			<div class="seccion">
+			<div id="paso-3" class="seccion">
 				<h2>Summary</h2>
 			</div>
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <script src="build/js/bundle.min.js"></script>
+	<script src="build/js/bundle.min.js"></script>
 </body>
+
 </html>
