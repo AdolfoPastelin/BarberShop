@@ -9,13 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Oculta o muestra una sección según el tab al que se presiona.
 	cambiarSeccion();
+
+	//Paginación siguiente
+	paginaSiguiente();
+
+	//Paginación y anterior
+	paginaAnterior();
+
+	//paginación entre 1 al 3
+	paginador();
 });
 
 const iniciarApp = () => mostrarServicios();
 
 function mostrarSeccion() {
+
+	//Eliminar mostrar-seccion de la sección anterior
+	const seccionAnterior = document.querySelector('.mostrar-seccion');
+	if (seccionAnterior) {
+		seccionAnterior.classList.remove('mostrar-seccion');
+	}
+
 	const seccionActual = document.querySelector(`#paso-${pagina}`);
 	seccionActual.classList.add('mostrar-seccion');
+
+	//Eliminar la clase de actual en el tab anterior
+	const tabAnterior = document.querySelector('.tabs .actual');
+	if (tabAnterior) {
+		tabAnterior.classList.remove('actual');
+	}
 
 	// Resaltar el tab actual
 	const tab = document.querySelector(`[data-paso="${pagina}"]`); //? Obtiene el id del boton actual
@@ -30,19 +52,9 @@ function cambiarSeccion() {
 			e.preventDefault();
 			pagina = parseInt(e.target.dataset.paso);
 
-			//Eliminar mostrar-seccion de la sección anterior
-			document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+			mostrarSeccion();
 
-			//Agrega mostrar-seccion donde dimos click
-			const seccion = document.querySelector(`#paso-${pagina}`);
-			seccion.classList.add('mostrar-seccion');
-
-			//Eliminar la clase de actual en el tab anterior
-			document.querySelector('.tabs .actual').classList.remove('actual');
-
-			//Agregar la clase actual en el nuevo tab
-			const tab = document.querySelector(`[data-paso="${pagina}"]`);
-			tab.classList.add('actual');
+			paginador();
 		});
 	});
 }
@@ -65,7 +77,7 @@ async function mostrarServicios() {
 
 			//Generar precio del servicio
 			const precioServicio = document.createElement('P');
-			precioServicio.textContent = `$ ${precio}`;
+			precioServicio.textContent = `$ ${precio} USD`;
 			precioServicio.classList.add('precio-servicio');
 
 			//Generar el contenedor para el servicio
@@ -83,14 +95,12 @@ async function mostrarServicios() {
 			//Inyectarlo en el HTML
 			document.querySelector('#servicios').appendChild(divServicio);
 
-			console.log(divServicio);
+			// console.log(divServicio);
 		});
 	} catch (error) {
 		console.log(error);
 	}
 }
-
-//#TODO: Hacer notas en Notion acerca de esta función.
 
 function seleccionarServicio(e) {
 	//Forzar que el elemento al cual le damos click sea el DIV
@@ -110,4 +120,43 @@ function seleccionarServicio(e) {
 	} else {
 		elemento.classList.add('seleccionado');
 	}
+}
+
+function paginaSiguiente() {
+	const paginaSiguiente = document.querySelector('#siguiente');
+	paginaSiguiente.addEventListener('click', () => {
+		pagina++;
+
+		console.log(pagina);
+
+		paginador();
+	});
+}
+
+function paginaAnterior() {
+	const paginaAnterior = document.querySelector('#anterior');
+	paginaAnterior.addEventListener('click', () => {
+		pagina--;
+
+		console.log(pagina);
+
+		paginador();
+	});
+}
+
+function paginador() {
+	const paginaSiguiente = document.querySelector('#siguiente');
+	const paginaAnterior = document.querySelector('#anterior');
+
+	if (pagina === 1) {
+		paginaAnterior.classList.add('ocultar');
+	} else if (pagina === 3) {
+		paginaSiguiente.classList.add('ocultar');
+		paginaAnterior.classList.remove('ocultar');
+	} else {
+		paginaAnterior.classList.remove('ocultar');
+		paginaSiguiente.classList.remove('ocultar');
+	}
+
+	mostrarSeccion();
 }
