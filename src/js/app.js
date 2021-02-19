@@ -1,6 +1,13 @@
 //Variables globales
 let pagina = 1;
 
+const cita = {
+	nombre: '',
+	fecha: '',
+	hora: '',
+	servicios: [],
+};
+
 document.addEventListener('DOMContentLoaded', function () {
 	iniciarApp();
 
@@ -18,12 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//paginación entre 1 al 3
 	paginador();
+
+	//Muestra el resumen de la cita (o mensaje de error en caso de no pasar la validación)
+	mostrarResumen();
+
+	//Almacena el nombre de la cita en el objeto
+	nombreCita();
 });
 
 const iniciarApp = () => mostrarServicios();
 
 function mostrarSeccion() {
-
 	//Eliminar mostrar-seccion de la sección anterior
 	const seccionAnterior = document.querySelector('.mostrar-seccion');
 	if (seccionAnterior) {
@@ -117,9 +129,36 @@ function seleccionarServicio(e) {
 	//comprueba si existe un elemento que contenga la clase .seleccionado
 	if (elemento.classList.contains('seleccionado')) {
 		elemento.classList.remove('seleccionado');
+
+		const id = parseInt(elemento.dataset.idServicio);
+
+		eliminarServicio(id);
 	} else {
 		elemento.classList.add('seleccionado');
+
+		const servicioObj = {
+			id: parseInt(elemento.dataset.idServicio),
+			nombre: elemento.firstElementChild.textContent,
+			precio: elemento.firstElementChild.nextElementSibling.textContent,
+		};
+
+		agregarServicio(servicioObj);
+		// console.log(servicioObj);
 	}
+}
+
+function eliminarServicio(id) {
+	const { servicios } = cita;
+	cita.servicios = servicios.filter((servicio) => servicio.id !== id);
+
+	console.log(cita);
+}
+
+function agregarServicio(servicioObj) {
+	const { servicios } = cita;
+	cita.servicios = [...servicios, servicioObj];
+
+	console.log(cita);
 }
 
 function paginaSiguiente() {
@@ -159,4 +198,69 @@ function paginador() {
 	}
 
 	mostrarSeccion();
+}
+
+function mostrarResumen() {
+	//Destructuring
+	const { nombre, fecha, hora, servicios } = cita;
+
+	//Seleccionar el resumen
+	const divResumen = document.querySelector('.contenido-resumen');
+
+	//Validacion de objeto
+	if (Object.values(cita).includes('')) {
+		const noServicios = document.createElement('P');
+		noServicios.textContent = 'Data from name, date or time is missing';
+		noServicios.classList.add('invalidar-cita');
+
+		//Agregar a divResumen
+		divResumen.appendChild(noServicios);
+	}
+}
+
+function nombreCita() {
+	const nombreInput = document.querySelector('#nombre');
+
+	nombreInput.addEventListener('input', (e) => {
+		const nombreTexto = e.target.value.trim();
+
+		//Validacion nombre texto vacio
+		if (nombreTexto === '' || nombreTexto.length < 2) {
+			mostrarAlerta('Invalid name', 'error');
+		} else {
+			const alerta = document.querySelector('.alerta');
+			if (alerta) {
+				alerta.remove();
+			}
+		}
+		cita.nombre = nombreTexto;
+	});
+}
+
+function mostrarAlerta(mensaje, tipo) {
+
+	//Si hay una alerta previa, entonces no crear otra
+	const alertaPrevia = document.querySelector('.alerta');
+	if (alertaPrevia) {
+		return;
+	}
+
+	const alerta = document.createElement('DIV');
+	alerta.textContent = mensaje;
+	alerta.classList.add('alerta');
+
+	if (tipo === 'error') {
+		alerta.classList.add('error');
+	}
+
+	console.log(alerta);
+
+	// Insertar en el HTML
+	const formulario = document.querySelector('.formulario');
+	formulario.appendChild(alerta);
+
+	//Eliminar la alerta despues de 3 segundos
+	setTimeout(() => {
+		alerta.remove();
+	}, 4000);
 }

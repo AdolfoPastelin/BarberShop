@@ -28,16 +28,40 @@
 
 
 			<!-- Inicia el contenido de la app -->
+
+			<!-- Paso 1 .- Servicios -->
 			<div id="paso-1" class="seccion">
 				<h2>Services</h2>
 				<p class="servicio-subtitulo text-center">Choose the services that you want</p>
 				<p class="text-center">(You can select more than one option)</p>
 				<div id="servicios" class="listado-servicios"></div>
 			</div>
+
+			<!-- Paso 2 .- Información del cliente -->
 			<div id="paso-2" class="seccion">
 				<h2>Data and appointment</h2>
+				<p class="text-center">Complete the form and select a valid date</p>
+
+				<form class="formulario" action="#">
+					<div class="campo">
+						<label for="nombre">Name</label>
+						<input type="text" id="nombre" name="nombre" placeholder="Type your full name right here">
+					</div>
+
+					<div class="campo">
+						<label for="fecha">Date</label>
+						<input type="date" value="MM-DD-YYYY" name="fecha" id="fecha">
+					</div>
+
+					<div class="campo">
+						<label for="hora">Time</label>
+						<input type="time" name="hora" id="hora">
+					</div>
+				</form>
 			</div>
-			<div id="paso-3" class="seccion">
+
+			<!-- Paso 3 .- Resumen -->
+			<div id="paso-3" class="seccion contenido-resumen">
 				<h2>Summary</h2>
 			</div>
 
