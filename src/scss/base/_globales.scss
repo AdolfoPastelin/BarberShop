@@ -36,14 +36,16 @@ h1, h2, h3 {
 
 h1 {
 	font-family: $fuente_principal;
-    font-size: 4rem;
+    font-size: 4.4rem;
 	font-weight: 700;
-	text-shadow: $sombraTitulo1;
+	// text-shadow: $sombraTitulo1;
+	text-shadow: $sombraTitulo1, $sombraSecundariaTitulo1;
 }
 h2 {
     font-size: 3.6rem;
-	text-shadow: $sombraTitulo1;
+	text-shadow: $sombraTitulo1, $sombraSecundariaTitulo1;
 	font-family: $fuente_principal;
+
 }
 h3 {
     font-size: 3rem;
