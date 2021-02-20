@@ -50,4 +50,6 @@ h2 {
 h3 {
     font-size: 3rem;
     text-align: center;
+	text-shadow: $sombraTitulo1, $sombraSecundariaTitulo1;
+	font-family: $fuente_principal;
 }
