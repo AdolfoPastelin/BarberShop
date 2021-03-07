@@ -1,6 +1,5 @@
 <?php
-
-function obtenerServicios() : array
+function obtenerServicios(): array
 {
 	try {
 
@@ -11,12 +10,13 @@ function obtenerServicios() : array
 		$sql = "SELECT * FROM servicios;";
 		$consulta = mysqli_query($db, $sql);
 
-		//arreglo vacio
+		//arreglo indexado contenedor de servicios (como arreglos asociativos)
 		$servicios = [];
-
-		$i = 0;
+		$i = 0; //iterador para ir aumentando del indice de index de arreglo servicios
 
 		//obtener resultados
+		//? fetch_assoc (arreglo asociativo) solo trae el último registro
+		//? se usa un while para poder recorrer el fetch_assoc
 		while ($row = mysqli_fetch_assoc($consulta)) {
 
 			$servicios[$i]['id'] = $row['id'];
@@ -26,16 +26,9 @@ function obtenerServicios() : array
 			$i++;
 		}
 
-		// echo "<pre>";
-		// var_dump($servicios);
-		// echo "</pre>";
-
 		return $servicios;
-
 	} catch (\Throwable $th) {
-		// throw $th;
-		var_dump($th);
+		throw $th;
 	}
 }
-
 obtenerServicios();
